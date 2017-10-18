@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "graph.h"
 #include "heap.h"
+#include "dijkstra.h"
 /*
 #ifndef mymalloc
 #define mymalloc(TYPE p,TYPE2 n) {p = new Type<p> [n];if ((p)==NULL) {printf("not enough memory\n"); exit(1);};}
@@ -55,27 +56,19 @@ void Dijkstra(graph *G, int s, double *dist, int *parent)
   return ;
 }
 
-
+/*
 int main(int argc, char *argv[])
 {
   graph *G;
   double *dist;
   int *parent;
   int i;
-  //FILE *fin=fopen("graph.txt","r");
-  //if(fin==NULL)    {printf("File is not found"); return 0;}
-  for(int i=0; i<5; i++){
-    printf("%d",i);
-  }
   G = graph_input();
   //mymalloc(dist, G->n+1);
-  printf("4");
   dist = new double[G->n+1];if ((dist)==NULL) {printf("not enough memory\n"); exit(1);}
   //mymalloc(parent, G->n+1);
   parent = new int[G->n+1];if ((parent)==NULL) {printf("not enough memory\n"); exit(1);}
-  printf("4");
-  Dijkstra(G, 1, dist, parent);
-  printf("4");
+  Dijkstra(G, 2, dist, parent);
   for (i=1; i<=G->n; i++) {
     printf("p(%d)=%d dist=%lf\n", i, parent[i], dist[i]);
   }
@@ -83,5 +76,5 @@ int main(int argc, char *argv[])
   delete [] dist;
   graph_free(G);
   return 0;
-}
+}*/
 

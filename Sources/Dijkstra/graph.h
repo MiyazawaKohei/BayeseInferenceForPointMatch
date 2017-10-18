@@ -28,5 +28,7 @@ void graph_print(graph *G); // グラフの中身を表示する
 dlobj *graph_firstedge(graph *G, int i);
 dlobj *graph_nextedge(graph *G, int i, dlobj *e);
 dlobj *graph_prevedge(graph *G, int i, dlobj *e);
-
+dlobj *dlobj_new(int v, double w);
+dlist *dlist_new(void);
+void dlist_append(dlist *L, dlobj *r);
 #endif // GRAPH_T

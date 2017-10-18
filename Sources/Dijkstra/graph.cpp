@@ -139,6 +139,7 @@ graph *graph_input_undirected(FILE *fin)
   return G;
 }
 
+
 void graph_free(graph *G)
 {
   int i;

@@ -1,3 +1,5 @@
+#ifndef HEAP_T
+#define HEAP_T
 typedef struct {
     int value;
     double priority;
@@ -18,3 +20,4 @@ void heap_insert(heap *H, heapdata x);
 void heap_delete(heap *H, int idx);
 int heap_exist(heap *H, int idx);
 void heap_free(heap *H);
+#endif
