@@ -11,6 +11,7 @@ dlobj *dlobj_new(int v, double w){
     new_obj->prev = NULL;
     new_obj->v = v;
     new_obj->w = w;
+
     return new_obj;
 }
 
@@ -146,8 +147,7 @@ void graph_free(graph *G)
   for (i=0; i<G->n; i++) {
     dlist_free(G->E[i]);
   }
-  //delete []G->E;
-  //return;
+  delete []G->E;
   delete []G;
 }
 

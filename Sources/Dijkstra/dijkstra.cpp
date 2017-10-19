@@ -10,7 +10,7 @@
 */
 #define INFINITY 9999999999
 
-void Dijkstra(graph *G, int s, double *dist, int *parent)
+void Dijkstra(graph *G, int s, double *dist, int *parent, dlobj** fromedge)
 {
   int n,m;
   int i;
@@ -44,6 +44,7 @@ void Dijkstra(graph *G, int s, double *dist, int *parent)
           heap_delete(H, j.value); // dist[j] ‚ğXV‚·‚é‚Ì‚Åˆê’Uíœ
           dist[j.value] = dist[v.value] + edge->w; // j ‚Ü‚Å‚ÌÅ’Z˜H’·‚ğXV‚·‚é
           parent[j.value] = v.value; // Å’Z˜Hã‚Å j ‚Ì‘O‚Ì“_‚Í v
+          fromedge[j.value] = edge;
           j.priority = dist[j.value];
           heap_insert(H, j);
         }

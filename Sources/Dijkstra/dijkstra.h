@@ -4,4 +4,4 @@
 #include "heap.h"
 using namespace std;
 
-void Dijkstra(graph *G, int s, double *dist, int *parent);
+void Dijkstra(graph *G, int s, double *dist, int *parent, dlobj** fromedge);

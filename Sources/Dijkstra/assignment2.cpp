@@ -42,6 +42,7 @@ int main(int argc, char *argv[])
   graph *G;
   double *dist;
   int *parent;
+  dlobj** fromedge;
   int i;
   int n=4;
 	vector<double*> edgecost_between_biparticle;
@@ -50,17 +51,18 @@ int main(int argc, char *argv[])
 		edgecost_between_biparticle.push_back(new double [n]);
 		for(int j=0; j<n; j++){
 			//edgecost_between_biparticle.back()[j]=(i==j?0:1);
-			edgecost_between_biparticle[i][j]=(i==j?0.1:1);
+			edgecost_between_biparticle[i][j]=(i==j?i:100);
 		}
 	}
   G = graph_input_from_biparticle( n,edgecost_between_biparticle);
-  //mymalloc(dist, G->n+1);
   dist = new double[G->n+1];if ((dist)==NULL) {printf("not enough memory\n"); exit(1);}
-  //mymalloc(parent, G->n+1);
   parent = new int[G->n+1];if ((parent)==NULL) {printf("not enough memory\n"); exit(1);}
-  Dijkstra(G, 2*n+1, dist, parent);
+  fromedge = new dlobj*[G->n+1];if ((parent)==NULL) {printf("not enough memory\n"); exit(1);}
+   
+  Dijkstra(G, 2*n+1, dist, parent,fromedge);
   for (i=1; i<=G->n; i++) {
-    printf("p(%d)=%d dist=%lf\n", i, parent[i], dist[i]);
+    printf("p(%d)=%d dist=%lf,", i, parent[i], dist[i]);
+    printf("p(%d)=%lf\n", i, (fromedge[i]!=NULL?fromedge[i]->w:-1));
   }
   delete [] parent;
   delete [] dist;
