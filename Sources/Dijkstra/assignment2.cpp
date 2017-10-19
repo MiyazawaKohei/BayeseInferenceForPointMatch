@@ -62,25 +62,41 @@ int main(int argc, char *argv[])
 		edgecost_between_biparticle.push_back(new double [n]);
 		for(int j=0; j<n; j++){
 			//edgecost_between_biparticle.back()[j]=(i==j?0:1);
-			edgecost_between_biparticle[i][j]=(i==j?i:100);
+			edgecost_between_biparticle[i][j]=(i+j)%3;//(i==j?i+1:100);
 		}
 	}
+
   G = graph_input_from_biparticle( n,edgecost_between_biparticle);
   dist = new double[G->n+1];if ((dist)==NULL) {printf("not enough memory\n"); exit(1);}
   parent = new int[G->n+1];if ((parent)==NULL) {printf("not enough memory\n"); exit(1);}
-  fromedge = new dlobj*[G->n+1];if ((parent)==NULL) {printf("not enough memory\n"); exit(1);}
-   
-  Dijkstra(G, 2*n+1, dist, parent,fromedge);
-  for (i=1; i<=G->n; i++) {
-    printf("p(%d)=%d dist=%lf,", i, parent[i], dist[i]);
-    printf("p(%d)=%lf\n", i, (fromedge[i]!=NULL?fromedge[i]->w:-1));
+  
+  while(1){ 
+  	for(int i=0; i<2*n+2; i++){
+	  	dlobj* obj=G->E[i]->nil->next;
+	  	while(obj!=G->E[i]->nil){
+	  		printf("%d %d\n",i,obj->v);
+	  		obj=obj->next;
+	  	}
+  	}
+  	fromedge = new dlobj*[G->n+1];if ((parent)==NULL) {printf("not enough memory\n"); exit(1);}
+	  Dijkstra(G, 2*n+1, dist, parent,fromedge);
+	  if(dist[2*n+2]>10000) break;
+	  for (i=1; i<=G->n; i++) {
+	    printf("p(%d)=%d dist=%lf,", i, parent[i], dist[i]);
+	    printf("p(%d)=%lf\n", i, (fromedge[i]!=NULL?fromedge[i]->w:-1));
+	  }
+	  FlipEdges(n,G,parent,fromedge);
+	  delete [] fromedge;
   }
-  FlipEdges(n,G,parent,fromedge);
-  delete [] fromedge;
-  Dijkstra(G, 2*n+1, dist, parent,fromedge);
-  for (i=1; i<=G->n; i++) {
-    printf("p(%d)=%d dist=%lf,", i, parent[i], dist[i]);
-    printf("p(%d)=%lf\n", i, (fromedge[i]!=NULL?fromedge[i]->w:-1));
+  for(int i=0; i<2*n+2; i++){
+  	dlobj* obj=G->E[i]->nil->next;
+  	while(obj!=G->E[i]->nil){
+  		printf("%d %d\n",i,obj->v);
+  		obj=obj->next;
+  	}
+  }
+  for(int i=n; i<2*n; i++){
+  	printf("%d %d\n",i+1-n,G->E[i]->nil->next->v);
   }
   delete [] parent;
   delete [] dist;
