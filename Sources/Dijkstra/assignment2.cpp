@@ -37,6 +37,17 @@ graph *graph_input_from_biparticle(int n,vector<double*> edgecost_between_bipart
 
   return G;
 }
+void FlipEdges(int n, graph *G, int *parent, dlobj **fromedge){
+	int varticlenow=2*n+2;
+	dlobj *obj;
+	while(parent[varticlenow]!=-1){
+		printf("%d %d\n",varticlenow,parent[varticlenow]);
+		obj = dlobj_new(parent[varticlenow], -(fromedge[varticlenow]->w));
+    dlist_append(G->E[varticlenow-1], obj);
+		dlist_delete(fromedge[varticlenow]);
+		varticlenow=parent[varticlenow];
+	}
+}
 int main(int argc, char *argv[])
 {
   graph *G;
@@ -59,6 +70,13 @@ int main(int argc, char *argv[])
   parent = new int[G->n+1];if ((parent)==NULL) {printf("not enough memory\n"); exit(1);}
   fromedge = new dlobj*[G->n+1];if ((parent)==NULL) {printf("not enough memory\n"); exit(1);}
    
+  Dijkstra(G, 2*n+1, dist, parent,fromedge);
+  for (i=1; i<=G->n; i++) {
+    printf("p(%d)=%d dist=%lf,", i, parent[i], dist[i]);
+    printf("p(%d)=%lf\n", i, (fromedge[i]!=NULL?fromedge[i]->w:-1));
+  }
+  FlipEdges(n,G,parent,fromedge);
+  delete [] fromedge;
   Dijkstra(G, 2*n+1, dist, parent,fromedge);
   for (i=1; i<=G->n; i++) {
     printf("p(%d)=%d dist=%lf,", i, parent[i], dist[i]);

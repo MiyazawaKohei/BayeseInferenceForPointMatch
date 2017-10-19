@@ -52,9 +52,10 @@ void dlist_append(dlist *L, dlobj *r){
     return;
 }
 
-void dlist_delete(dlist *L, dlobj *r){
+void dlist_delete(dlobj *r){
     r->prev->next = r->next;
     r->next->prev = r->prev;
+    delete []r;
     return;
 }
 
