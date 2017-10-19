@@ -30,5 +30,9 @@ dlobj *graph_nextedge(graph *G, int i, dlobj *e);
 dlobj *graph_prevedge(graph *G, int i, dlobj *e);
 dlobj *dlobj_new(int v, double w);
 dlist *dlist_new(void);
+dlobj *dlist_search(dlist *L, int v);
+void dlist_insert(dlist *L, dlobj *r);
+void dlist_delete(dlist *L, dlobj *r);
 void dlist_append(dlist *L, dlobj *r);
+
 #endif // GRAPH_T

@@ -35,7 +35,7 @@ void Dijkstra(graph *G, int s, double *dist, int *parent)
   while (H->size > 0) {
     dlobj *edge;
     v = heap_extract_min(H);
-    printf("%d",v.value);
+    //printf("%d",v.value);
     edge = graph_firstedge(G, v.value); // v ‚©‚ço‚Ä‚¢‚éÅ‰‚ÌŽ}
     while (edge != NULL) {
       j.value = edge->v; // edge ‚Í (v,j)
@@ -55,8 +55,8 @@ void Dijkstra(graph *G, int s, double *dist, int *parent)
   heap_free(H);
   return ;
 }
-
 /*
+
 int main(int argc, char *argv[])
 {
   graph *G;
@@ -76,5 +76,6 @@ int main(int argc, char *argv[])
   delete [] dist;
   graph_free(G);
   return 0;
-}*/
+}
 
+*/

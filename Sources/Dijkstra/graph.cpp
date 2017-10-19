@@ -146,7 +146,8 @@ void graph_free(graph *G)
   for (i=0; i<G->n; i++) {
     dlist_free(G->E[i]);
   }
-  delete []G->E;
+  //delete []G->E;
+  //return;
   delete []G;
 }
 
