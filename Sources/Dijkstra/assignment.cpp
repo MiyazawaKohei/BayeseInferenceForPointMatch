@@ -48,23 +48,30 @@ void FlipEdges(int n, graph *G, int *parent, dlobj **fromedge){
 		varticlenow=parent[varticlenow];
 	}
 }
-int main(int argc, char *argv[])
+
+void AssignmentfromMatrix(vector<double*> edgecost_between_biparticle,
+  vector<int>* sigma)
 {
   graph *G;
   double *dist;
   int *parent;
   dlobj** fromedge;
   int i;
-  int n=4;
-	vector<double*> edgecost_between_biparticle;
-
-	for(int i=0; i<n; i++){
+  int n=edgecost_between_biparticle.size();
+  
+	/*for(int i=0; i<n; i++){
 		edgecost_between_biparticle.push_back(new double [n]);
 		for(int j=0; j<n; j++){
 			//edgecost_between_biparticle.back()[j]=(i==j?0:1);
 			edgecost_between_biparticle[i][j]=(i+j)%3;//(i==j?i+1:100);
 		}
-	}
+	}*/
+  for(int i=0; i<n; i++){
+    for(int j=0; j<n; j++){
+      printf("%lf",edgecost_between_biparticle[i][j]);//(i==j?i+1:100);
+    }
+    printf("\n");
+  }
 
   G = graph_input_from_biparticle( n,edgecost_between_biparticle);
   dist = new double[G->n+1];if ((dist)==NULL) {printf("not enough memory\n"); exit(1);}
@@ -97,10 +104,12 @@ int main(int argc, char *argv[])
   }
   for(int i=n; i<2*n; i++){
   	printf("%d %d\n",i+1-n,G->E[i]->nil->next->v);
+    (*sigma)[G->E[i]->nil->next->v-1]=i-n;
   }
+
+
   delete [] parent;
   delete [] dist;
   graph_free(G);
-  return 0;
 }
 

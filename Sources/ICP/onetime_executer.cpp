@@ -8,6 +8,7 @@
 #include <algorithm>
 #include <functional>
 #include "InitAndFind.h"
+#include "../Dijkstra/assignment.h"
 using namespace std;
 
 int main(int argc,char* argv[]){
@@ -29,6 +30,7 @@ int main(int argc,char* argv[]){
 	for(int i=0; i<n_a; i++) permutationcut[i]=permutation[i];
 	Eigen::Matrix<double,3,3> R;
 	vector<double> v(3);
+
 	cout<<"Minimized_RMSD:"<<Minimize_RMSD(A,B,permutationcut,&R,&v)<<endl;
 	vector<double*> Dmatrix;
 	for(int i=0; i<B.size();i++){
@@ -42,6 +44,11 @@ int main(int argc,char* argv[]){
 		}
 		cout<<endl;
 	}
+	vector<int> sigma(B.size());
+	AssignmentfromMatrix(Dmatrix,&sigma);
+	vector<int> sigmacut(n_a,0);
+	for(int i=0; i<n_a; i++) sigmacut[i]=permutation[i];
+	cout<<"Minimized_RMSD:"<<Minimize_RMSD(A,B,sigmacut,&R,&v)<<endl;
 	//Find_Minimizing_Permutation(A,B);
 	Close_Vectors(A);
 	Close_Vectors(B);

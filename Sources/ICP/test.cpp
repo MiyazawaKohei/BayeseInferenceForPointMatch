@@ -18,4 +18,5 @@ int main(){
 	vector<double> t(3);
 	t[1]=1;
 	cout<<R(i,2)*t[i]<<endl;
+	vector<int> sigma(i);
 }
