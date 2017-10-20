@@ -42,5 +42,14 @@ int main(){
 	vector<double*> Protein2;
 	Protein1=GetDataofProtein( m, "../DataSet/Protein1Green");
 	Protein2=GetDataofProtein( n, "../DataSet/Protein2Green");
+	
+	double alpha=1;
+	double beta=36;
+	double mu_tau[3]={0,0,0};
+	double sigma_tau[3]=50.0;
+	double lambda_par_mu=0.003;
+	double pstar=0.5;
+	
+
 	return 0;
 }
